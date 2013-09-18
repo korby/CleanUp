@@ -18,7 +18,7 @@ class Clean
 
         $cmd[] = "cd ".$dirPath;
         $cmd[] = "git status";
-        $process = new Process(implode(";",$cmd));
+        $process = new Process(implode(";",$cmd), null, null, null, 3600);
         $process->run(function ($type, $buffer) {
             if ('err' === $type) {
                 $this->error[] = $buffer;
@@ -59,7 +59,7 @@ class Clean
             echo "\n".$cmd;
         }
         else {
-            $process = new Process($cmd);
+            $process = new Process($cmd, null, null, null, 3600);
             echo "\nProcessing ".$cmd;
             $process->run(function ($type, $buffer) {
                 echo "\n".$buffer;
